@@ -7,6 +7,7 @@ exports.createUser = async (req, res) => {
     try {
         const user = await User.create({
             name: req.body.name,
+            phone: req.body.phone,
             email: req.body.email,
             password: req.body.password,
         });
