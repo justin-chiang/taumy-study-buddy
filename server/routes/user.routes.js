@@ -5,12 +5,18 @@ const router = express.Router();
 const { createUser, userLogin } = require('../controllers/user.controller');
 
 // middleware
-// const { authenticateToken } = require('../middleware/userauth')
-
-// router.use(authenticateToken);
 
 // routes
+// test route
+router.get('/', (req, res) => {
+    res.status(200).json({
+        message: 'Success',
+    });
+});
+
+// register new user
 router.post('/register', createUser);
+// login with existing user
 router.post('/login', userLogin);
 
 module.exports = router;

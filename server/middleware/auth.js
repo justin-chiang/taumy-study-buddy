@@ -6,14 +6,15 @@ function authenticateToken(req, res, next) {
     const token = auth && auth.split(' ')[1];
     
     try{
-        jwt.verify(token, process.env.JWT_SECRET);
+        const user = jwt.verify(token, process.env.JWT_SECRET);
         req.user = user;
         console.log("token auth'd");
+        console.log(req.user);
         next();
     } catch (err) {
         console.log(err);
         return res.json({ status: 'error', error: err });
     }  
-};
+}
 
 module.exports = { authenticateToken };

@@ -5,6 +5,8 @@ const router = express.Router();
 const { showHome } = require('../controllers/dashboard.controller');
 
 // middleware
+const { authenticateToken } = require('../middleware/auth');
+router.use(authenticateToken);
 
 // routes
 router.get('/home', showHome);

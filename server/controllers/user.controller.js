@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
 
+// creates new user in db using name, phone, email, pw
 exports.createUser = async (req, res) => {
     console.log(req.body);
     try {
@@ -11,13 +12,19 @@ exports.createUser = async (req, res) => {
             email: req.body.email,
             password: req.body.password,
         });
-        return res.json({ status: 'ok' });
+        return res.status(201).json({
+            message: 'Success'
+        });
     } catch (err) {
         console.log(err);
-        return res.json({ status: 'error', error: err });
+        return res.status(404).json({
+            message: 'Error creating user',
+            error: err
+        });
     }
 };
 
+// login with existing user and generate jwt
 exports.userLogin = async (req, res) => {
     console.log(req.body);
     const user = await User.findOne({
@@ -34,9 +41,15 @@ exports.userLogin = async (req, res) => {
             process.env.JWT_SECRET
         )
         console.log(token);
-        return res.json({ status: 'ok', user: token });
+        return res.status(201).json({
+            message: 'Success',
+            user: token
+        });
     }
     else {
-        return res.json({ status: 'error', user: false });
+        return res.status(404).json({
+            status: 'Unable to login',
+            user: false
+        });
     }
 };

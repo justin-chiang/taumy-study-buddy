@@ -20,14 +20,8 @@ app.use(cors({ origin: true, credentials: true }));
 // routes
 const userRouter = require('./routes/user.routes');
 const dashboardRouter = require('./routes/dashboard.routes');
-app.use('/users', userRouter);
+app.use('/', userRouter);
 app.use('/dashboard', dashboardRouter);
-
-app.get('/', (req, res) => {
-    res.status(200).json({
-        message: 'ok',
-    });
-});
 
 // port
 const port = process.env.PORT || 9000;
