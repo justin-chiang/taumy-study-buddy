@@ -18,10 +18,10 @@ app.use(express.json());
 app.use(cors({ origin: true, credentials: true }));
 
 // routes
-const userRouter = require('./routes/user.routes');
-const dashboardRouter = require('./routes/dashboard.routes');
+const userRouter = require('./routes/userRoutes');
+const studyRouter = require('./routes/studyRoutes');
 app.use('/', userRouter);
-app.use('/dashboard', dashboardRouter);
+app.use('/study', studyRouter);
 
 // port
 const port = process.env.PORT || 9000;
