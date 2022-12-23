@@ -20,8 +20,8 @@ app.use(cors({ origin: true, credentials: true }));
 // routes
 const userRouter = require('./routes/userRoutes');
 const studyRouter = require('./routes/studyRoutes');
-app.use('/', userRouter);
-app.use('/study', studyRouter);
+app.use('/api/users', userRouter);
+app.use('/api/study', studyRouter);
 
 // port
 const port = process.env.PORT || 9000;

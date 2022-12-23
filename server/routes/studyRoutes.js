@@ -2,19 +2,23 @@ const express = require("express");
 const router = express.Router();
 
 // controllers
-const { createSession,
-    getSessions,
-    updateSession,
-    deleteSession } = require('../controllers/studyController');
+const { createSession, getSessions, updateSession, deleteSession } = require('../controllers/studyController');
 
 // middleware
 const { authenticateToken } = require('../middleware/userAuth');
-router.use(authenticateToken);
 
 // routes
+
+// Create study session given user id, study session params (for Pi use)
 router.post('/createSession', createSession);
-router.get('/getSessions', getSessions);
+
+// Gets all study sessions for a user by generated JWT (for web app use)
+router.get('/getSessions', authenticateToken, getSessions);
+
+// Updates study session (unused)
 router.put('/updateSession', updateSession);
+
+// Deletes study session (unused)
 router.delete('/deleteSession', deleteSession);
 
 module.exports = router;

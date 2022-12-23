@@ -5,9 +5,9 @@ require("dotenv").config();
 // @desc    Create new user in db
 // @route   POST /register
 const registerUser = async (req, res) => {
-    const { name, phone, email, password } = req.body
+    const { name, email, password } = req.body;
 
-    const userExists = await User.findOne({ email })
+    const userExists = await User.findOne({ email });
     if (userExists) {
         res.status(400).json({
             message: 'User already exists',
@@ -17,7 +17,6 @@ const registerUser = async (req, res) => {
     try {
         const user = await User.create({
             name,
-            phone,
             email,
             password,
         });
@@ -39,7 +38,6 @@ const registerUser = async (req, res) => {
 // @route   POST /login
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
-
     const user = await User.findOne({ email, password });
 
     if (user) {
@@ -56,13 +54,28 @@ const loginUser = async (req, res) => {
     }
     else {
         return res.status(404).json({
-            status: 'Unable to login',
-            user: false
+            message: 'Unable to login',
+            user: false,
+            error: true
         });
     }
 }
 
-// @desc    Gets who is currently logged in
+// @desc    Obtains all registered users in database (for Pi use)
+// @route   GET /everyone
+const getEveryone = async (req, res) => {
+    try {
+        const allUsers = await User.find({});
+        return res.status(200).json(allUsers);
+    } catch (err) {
+        return res.status(404).json({
+            message: 'Error fetching users',
+            error: err
+        });
+    }
+}
+
+// @desc    Obtains user data based on generated JWT for session
 // @route   GET /whoami
 const getWho = async (req, res) => {
     res.status(200).json(req.user);
@@ -71,5 +84,6 @@ const getWho = async (req, res) => {
 module.exports = {
     registerUser,
     loginUser,
+    getEveryone,
     getWho
 }

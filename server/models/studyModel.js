@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 // schema describing user in db
 const sessionSchema = new mongoose.Schema(
     {
-        user: {
+        user: { type: String, required: true },
+        userId: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: 'User',
@@ -17,7 +18,7 @@ const sessionSchema = new mongoose.Schema(
     {
         timestamps: true
     },
-    { collection: 'study-data' }
+    { collection: 'sessions' }
 );
 
 const model = mongoose.model('session', sessionSchema);
