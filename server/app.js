@@ -15,6 +15,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cors({ origin: true, credentials: true }));
 
 // routes

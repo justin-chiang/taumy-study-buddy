@@ -46,6 +46,7 @@ const loginUser = async (req, res) => {
             { _id: user._id, name: user.name, email: user.email }, process.env.JWT_SECRET,
             { expiresIn: '30d', }
         )
+        console.log(token);
         return res.status(201).json({
             _id: user.id,
             name: user.name,
