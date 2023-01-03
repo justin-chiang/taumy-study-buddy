@@ -41,7 +41,7 @@ export default function Login() {
 
         <div className="input-field">
           <h3 className="field-label">Password</h3>
-          <input type="text" id="password" className="form-field" value={password} 
+          <input type="password" id="password" className="form-field" value={password} 
           onChange={(event) => setPassword(event.target.value)} ></input>
         </div>
 
