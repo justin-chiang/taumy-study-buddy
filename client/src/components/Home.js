@@ -26,11 +26,11 @@ export default function Home() {
           setUser(fetchUser.data);
 
           if (fetchStudyData.data.studied) {
-            setTaumyState('happy');
-            setStudyMsg('You logged a study session today! Keep up the good work.') //fix
+            setTaumyState('../assets/emotionGrin.gif');
+            setStudyMsg('You logged a study session today! Come back tomorrow or study more today.') //fix
           }
           else {
-            setTaumyState('sad');
+            setTaumyState('../assets/emotionSad.gif');
             setStudyMsg("Taumy is sad you haven't studied yet today. Log a study session to cheer Taumy up!");
           }
         } catch (err) {

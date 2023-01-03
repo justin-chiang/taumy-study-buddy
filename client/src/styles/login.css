@@ -1,0 +1,31 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #7FBADC;
+    font-family: 'Roboto Flex', sans-serif;
+    color: white;
+}
+
+.login-form .form-field {
+    width: 285px;
+    height: 50px;
+    background-color: #457B9D;
+    border-radius: 15px;
+
+}
+
+.login-form .btn {
+    width: 150px;
+    height: 55px;
+    background-color: #26446E;
+    border-radius: 20px;
+}
