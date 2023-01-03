@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import '../styles/Login.css';
+import '../styles/Login.css';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -28,31 +28,27 @@ export default function Login() {
   }
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleLogin}>
-        <h1>Login</h1>
-        <label class="label">Email</label>
-        <input
-          type="text"
-          id="email"
-          class="form-field"
-          placeholder="Email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <br />
-        <label class="label">Password</label>
-        <input
-          type="password"
-          id="password"
-          class="form-field"
-          placeholder="Password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        <br />
-        <button class="btn" type="submit">Login</button>
-      </form>
+    <div className="bg-container">
+      <div className="login-container">
+
+        <h3 className="header">Login</h3>
+
+        <div className="input-field">
+          <h3 className="field-label">Email</h3>
+          <input type="text" id="email" className="form-field" value={email} 
+          onChange={(event) => setEmail(event.target.value)} ></input>
+        </div>
+
+        <div className="input-field">
+          <h3 className="field-label">Password</h3>
+          <input type="text" id="password" className="form-field" value={password} 
+          onChange={(event) => setPassword(event.target.value)} ></input>
+        </div>
+
+        <button className="btn" type="submit" onClick={handleLogin}>Login</button>
+
+        <h3 className="footer" onClick={() => navigate('/register')}>Don't have an account?</h3>
+      </div>
     </div>
     
   );

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/Register.css';
 
 export default function Login() {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async (event) => {
+  const handleRegister = async (event) => {
     event.preventDefault();
     if (!name || !email || !password) {
       return;
@@ -24,35 +27,33 @@ export default function Login() {
   }
 
   return (
-    <div className="main">
-      <h1>Register</h1>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
-        <br />
-        <label htmlFor="email">Email:</label>
-        <input
-          type="text"
-          id="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <br />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        <br />
-        <button type="submit">Register</button>
-      </form>
+    <div className="bg-container">
+      <div className="login-container">
+
+        <h3 className="header">Register</h3>
+
+        <div className="input-field">
+          <h3 className="field-label">Name</h3>
+          <input type="text" id="name" className="form-field" value={name} 
+          onChange={(event) => setName(event.target.value)} ></input>
+        </div>
+
+        <div className="input-field">
+          <h3 className="field-label">Email</h3>
+          <input type="text" id="email" className="form-field" value={email} 
+          onChange={(event) => setEmail(event.target.value)} ></input>
+        </div>
+
+        <div className="input-field">
+          <h3 className="field-label">Password</h3>
+          <input type="text" id="password" className="form-field" value={password} 
+          onChange={(event) => setPassword(event.target.value)} ></input>
+        </div>
+
+        <button className="btn" type="submit" onClick={handleRegister}>Login</button>
+
+        <h3 className="footer" onClick={() => navigate('/')}>Login with existing account</h3>
+      </div>
     </div>
     
   );

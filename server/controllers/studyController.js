@@ -120,34 +120,37 @@ const getStudiedToday = async (req, res) => {
 
 const getStudyStats = async (req, res) => {
     try {
+        const allSessions = await Session.find({ userId: req.user._id });
+        const overallTotal = allSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
+        const longestSession = Math.max(...allSessions.map(session => session.duration));
+
         const today = new Date();
         const todayDay = today.getDay();
         const begOfWeek = new Date(today.setDate(today.getDate() - todayDay));
         begOfWeek.setHours(0, 0, 0, 0);
         const currDay = new Date();
 
-        console.log(currDay.toString());
-        console.log(begOfWeek.toString());
+        // console.log(currDay.toString());
+        // console.log(begOfWeek.toString());
 
-        console.log(currDay);
-        console.log(begOfWeek);
+        // console.log(currDay);
+        // console.log(begOfWeek);
 
         const weekSessions = await Session.find({ userId: req.user._id, start: { $gte: begOfWeek, $lte: currDay } });
-        const studiedThisWeek = weekSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
+        const weekTotal = weekSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
 
         const pstToday = currDay.toString().substring(0, 15);
         const todaysSessions = weekSessions.filter((session) => {
             const isoString = session.start.toString().substring(0, 15);
             return isoString === pstToday;
         });
-        const studiedToday = todaysSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
-
-        console.log('studied this week: ' + studiedThisWeek);
-        console.log('studied today: ' + studiedToday);
+        const todayTotal = todaysSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
 
         return res.status(200).json({
-            weekTotal: Math.floor(studiedThisWeek / 60) + 'h ' + studiedThisWeek % 60 + 'm',
-            todayTotal: Math.floor(studiedToday / 60) + 'h ' + studiedToday % 60 + 'm',
+            weekTotal: Math.floor(weekTotal / 60) + 'h ' + weekTotal % 60 + 'm',
+            todayTotal: Math.floor(todayTotal / 60) + 'h ' + todayTotal % 60 + 'm',
+            overallTotal: Math.floor(overallTotal / 60) + 'h ' + overallTotal % 60 + 'm',
+            longestSession: Math.floor(longestSession / 60) + 'h ' + longestSession % 60 + 'm',
         });
     } catch (err) {
         return res.status(404).json({
