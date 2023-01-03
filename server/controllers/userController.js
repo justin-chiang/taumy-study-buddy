@@ -80,6 +80,7 @@ const getEveryone = async (req, res) => {
 // @desc    Obtains user data based on generated JWT for session
 // @route   GET /whoami
 const getWho = async (req, res) => {
+    
     res.status(200).json(req.user);
 }
 

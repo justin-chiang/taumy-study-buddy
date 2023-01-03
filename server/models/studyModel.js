@@ -9,11 +9,10 @@ const sessionSchema = new mongoose.Schema(
             required: true,
             ref: 'User',
         },
-        duration: { type: String, required: true },
+        duration: { type: Number, required: true },
         success: { type: Boolean, required: true },
-        startTime: { type: String, required: true },
-        endTime: { type: String, required: true },
-        date: { type: String, required: true },
+        start: { type: Date, required: true },
+        end: { type: Date, required: true },
     },
     {
         timestamps: true

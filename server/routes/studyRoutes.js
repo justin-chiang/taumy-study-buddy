@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // controllers
-const { createSession, getSessions, updateSession, deleteSession } = require('../controllers/studyController');
+const { createSession, getSessions, updateSession, deleteSession, getStudiedToday, getStudyStats } = require('../controllers/studyController');
 
 // middleware
 const { authenticateToken } = require('../middleware/userAuth');
@@ -20,5 +20,10 @@ router.put('/updateSession', updateSession);
 
 // Deletes study session (unused)
 router.delete('/deleteSession', deleteSession);
+
+router.get('/getStudiedToday', authenticateToken, getStudiedToday)
+
+// Gets study data displayed on dashboard stats page
+router.get('/getStudyStats', authenticateToken, getStudyStats);
 
 module.exports = router;

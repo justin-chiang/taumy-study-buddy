@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,6 +18,7 @@ export default function Login() {
       const loginResponse = await axios.post('http://localhost:9000/api/users/login', { email, password });
       localStorage.setItem('jwt_token', loginResponse.data.token);
       console.log(loginResponse);
+      navigate('/home');
     } catch (err) {
       alert('failed login');
       console.log(err);

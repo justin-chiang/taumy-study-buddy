@@ -1,12 +1,12 @@
 import React from 'react';
-import ReactDOM from "react-dom/client";
 import Login from './Login';
 import Register from './Register';
 import Home from './Home';
 import Study from './Study';
+import Stats from './Stats';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-export default function App() {
+function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -14,10 +14,10 @@ export default function App() {
         <Route path="register" element={<Register />} />
         <Route path="home" element={<Home />} />
         <Route path="study" element={<Study />} />
+        <Route path="stats" element={<Stats />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+export default App;
