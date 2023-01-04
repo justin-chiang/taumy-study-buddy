@@ -4,7 +4,7 @@ const User = require('../models/userModel');
 require("dotenv").config();
 
 // @desc    Create new study session (for Pi)
-// @route   POST study/createSession
+// @route   POST api/study/createSession
 const createSession = async (req, res) => {
     const { userId, duration, success, start, end, date } = req.body;
 
@@ -30,7 +30,7 @@ const createSession = async (req, res) => {
 }
 
 // @desc    Get study sessions for logged in user (for web app)
-// @route   GET study/getSessions
+// @route   GET api/study/getSessions
 const getSessions = async (req, res) => {
     try {
         const sessions = await Session.find({ userId: req.user._id });
@@ -44,7 +44,7 @@ const getSessions = async (req, res) => {
 }
 
 // @desc    Update study session (likely not used)
-// @route   PUT study/updateSession
+// @route   PUT api/study/updateSession
 const updateSession = async (req, res) => {
     try {
         const session = await Session.findById(req.params.id);
@@ -71,7 +71,7 @@ const updateSession = async (req, res) => {
 }
 
 // @desc    Delete study session (likely not used)
-// @route   DELETE study/deleteSession
+// @route   DELETE api/study/deleteSession
 const deleteSession = async (req, res) => {
     try {
         const session = await Session.findById(req.params.id);
@@ -97,6 +97,8 @@ const deleteSession = async (req, res) => {
     }
 }
 
+// @desc    Gets whether or not user has studied today
+// @route   GET api/study/deleteSession
 const getStudiedToday = async (req, res) => {
     try {
         const today = new Date();
@@ -118,6 +120,8 @@ const getStudiedToday = async (req, res) => {
     }
 }
 
+// @desc    Gets study stats for this week and all time on stats page
+// @route   GET api/study/deleteSession
 const getStudyStats = async (req, res) => {
     try {
         const allSessions = await Session.find({ userId: req.user._id });

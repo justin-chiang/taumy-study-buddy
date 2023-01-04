@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import loading from '../assets/loading.gif';
 import home from '../assets/home.png';
 import study from '../assets/study.png';
 import stats from '../assets/stats.png';
@@ -29,7 +30,7 @@ export default function Stats() {
           setStudyStats(fetchStudyData.data);
         } catch (err) {
           localStorage.removeItem('jwt_token');
-          alert('error');
+          alert('Invalid session, navigating to login page.');
           console.log(err);
           navigate('/');
         }
@@ -42,7 +43,13 @@ export default function Stats() {
   }, [navigate]);
 
   if (!studyStats) {
-    return <div>Fetching data</div>
+    return(
+      <div className="bg-container">
+        <div className="loading">
+          <img src={loading}></img>
+        </div>
+      </div>
+    )
   }
 
   return (

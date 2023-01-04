@@ -18,6 +18,18 @@ body {
     align-items: center;
 }
 
+.loading {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading img {
+    width: 30px;
+    height: 30px;
+}
+
 .dashboard-container {
     width: 90vw;
     height: 90vh;
@@ -56,6 +68,7 @@ body {
     font-size: 34px;
     font-weight: 400;
     margin-bottom: 10px;
+    color: #1D3557;
 }
 
 .stats-card .stats-box {

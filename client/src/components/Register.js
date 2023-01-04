@@ -20,7 +20,7 @@ export default function Login() {
       const registerResponse = await axios.post('http://localhost:9000/api/users/register', { name, email, password });
       console.log(registerResponse);
     } catch (err) {
-      alert('user already exists');
+      alert('User with this email already exists. Please enter another email to create an account.');
       console.log(err);
     }
     
@@ -50,7 +50,7 @@ export default function Login() {
           onChange={(event) => setPassword(event.target.value)} ></input>
         </div>
 
-        <button className="btn" type="submit" onClick={handleRegister}>Login</button>
+        <button className="btn" type="submit" onClick={handleRegister}>Register</button>
 
         <h3 className="footer" onClick={() => navigate('/')}>Login with existing account</h3>
       </div>

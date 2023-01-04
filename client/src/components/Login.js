@@ -21,7 +21,6 @@ export default function Login() {
       console.log(loginResponse);
       navigate('/home');
     } catch (err) {
-      alert('failed login');
       console.log(err);
     }
     
