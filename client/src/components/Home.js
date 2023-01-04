@@ -66,7 +66,7 @@ export default function Home() {
     return(
       <div className="bg-container">
         <div className="loading">
-          <img src={loading}></img>
+          <img src={loading} alt="Loading..."></img>
         </div>
       </div>
     )

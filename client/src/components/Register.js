@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Register.css';
-import { toHaveAccessibleDescription } from '@testing-library/jest-dom/dist/matchers';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -15,6 +14,18 @@ export default function Login() {
     if (!name || !email || !password) {
       return;
     }
+
+    const emailRegex = /\S+@\S+\.\S+/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{8,}$/
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    if (!passwordRegex.test(password)) {
+      alert('Please enter a password that is at least 8 characters long, containing at least one uppercase letter, lowercase letter, digit, and special symbol.')
+      return;
+    }
+    
     console.log(`Registering user with name: ${name}, with email: ${email} and password: ${password}`);
 
     try {

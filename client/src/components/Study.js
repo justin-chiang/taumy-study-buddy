@@ -42,7 +42,7 @@ export default function Study() {
     return(
       <div className="bg-container">
         <div className="loading">
-          <img src={loading}></img>
+          <img src={loading} alt="Loading..."></img>
         </div>
       </div>
     )
@@ -78,7 +78,7 @@ export default function Study() {
                 <p>duration</p>
               </div>
             </div>
-            <img className="taumy-state" src={session.success ? taumyHappy : taumySad}></img>
+            <img className="taumy-state" src={session.success ? taumyHappy : taumySad} alt="Loading..."></img>
           </div>
         ))}
       </div>
