@@ -6,8 +6,7 @@ body {
     padding: 0px;
     width: 100vw;
     height: 100vh;
-    height: -webkit-fill-available;
-    overflow: hidden;
+    min-height: -webkit-fill-available;
     background-color: #7FBADC;
     font-family: 'Roboto Flex', sans-serif;
     color: white;
@@ -15,7 +14,6 @@ body {
 
 .bg-container {
     height: 100%;
-    overflow: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -54,8 +52,8 @@ body {
 }
 
 .navbar img {
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
 }
 
 .navbar .active {
