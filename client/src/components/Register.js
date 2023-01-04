@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Register.css';
+import { toHaveAccessibleDescription } from '@testing-library/jest-dom/dist/matchers';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ export default function Login() {
 
     try {
       const registerResponse = await axios.post('http://localhost:9000/api/users/register', { name, email, password });
+      alert('User created! Navigate to the login page to login with your account.');
       console.log(registerResponse);
     } catch (err) {
       alert('User with this email already exists. Please enter another email to create an account.');

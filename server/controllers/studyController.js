@@ -33,8 +33,19 @@ const createSession = async (req, res) => {
 // @route   GET api/study/getSessions
 const getSessions = async (req, res) => {
     try {
-        const sessions = await Session.find({ userId: req.user._id });
-        return res.status(200).json(sessions);
+        let sessions = await Session.find({ userId: req.user._id });
+        sessions = sessions.sort((a, b) => b.start - a.start);
+        const sessionsData = sessions.map((session) => 
+            ({
+                date: session.start.toLocaleString().split(',')[0],
+                startTime: session.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                endTime: session.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                success: session.success,
+                duration: Math.floor(session.duration / 60) + 'h ' + session.duration % 60 + 'm',
+            })
+        );
+        console.log(sessionsData);
+        return res.status(200).json(sessionsData);
     } catch (err) {
         return res.status(404).json({
             message: 'Error fetching sessions',
@@ -110,7 +121,7 @@ const getStudiedToday = async (req, res) => {
         const todaysSessions = await Session.find({ userId: req.user._id, start: { $gte: today } });
 
         return res.status(200).json({
-            studied: todaysSessions.length !== 0
+            studied: (todaysSessions.length !== 0) && (todaysSessions.some((e) => (e.success)))
         });
     } catch (err) {
         return res.status(404).json({
@@ -126,7 +137,11 @@ const getStudyStats = async (req, res) => {
     try {
         const allSessions = await Session.find({ userId: req.user._id });
         const overallTotal = allSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
-        const longestSession = Math.max(...allSessions.map(session => session.duration));
+        let longestSession = 0;
+        if (allSessions.length !== 0) {
+            longestSession = Math.max(...allSessions.map(session => session.duration));
+        }
+        console.log(longestSession);
 
         const today = new Date();
         const todayDay = today.getDay();
@@ -134,11 +149,11 @@ const getStudyStats = async (req, res) => {
         begOfWeek.setHours(0, 0, 0, 0);
         const currDay = new Date();
 
-        // console.log(currDay.toString());
-        // console.log(begOfWeek.toString());
+        console.log(currDay.toString());
+        console.log(begOfWeek.toString());
 
-        // console.log(currDay);
-        // console.log(begOfWeek);
+        console.log(currDay);
+        console.log(begOfWeek);
 
         const weekSessions = await Session.find({ userId: req.user._id, start: { $gte: begOfWeek, $lte: currDay } });
         const weekTotal = weekSessions.reduce((accumulator, session) => accumulator + session.duration, 0);

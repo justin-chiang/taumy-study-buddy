@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import taumyHappy from '../assets/emotionGrin.gif';
+import taumySad from '../assets/emotionSad.gif';
 import loading from '../assets/loading.gif';
 import home from '../assets/home.png';
 import study from '../assets/study.png';
@@ -22,7 +24,6 @@ export default function Study() {
             }
           });
           setStudySessions(fetchStudySessions.data);
-          console.log(studySessions);
         } catch (err) {
           localStorage.removeItem('jwt_token');
           alert('Invalid session, navigating to login page.');
@@ -47,10 +48,39 @@ export default function Study() {
     )
   }
 
+  if (studySessions.length === 0) {
+    return(
+      <div className="bg-container">
+        <div className="dashboard-container-1">
+          <h3>No study sessions logged! Log one today.</h3>
+        </div>
+        <div className="navbar">
+          <img src={home} onClick={() => navigate('/home')} alt="Loading..." />
+          <img src={study} className="active" onClick={() => navigate('/study')} alt="Loading..." />
+          <img src={stats} onClick={() => navigate('/stats')} alt="Loading..." />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="bg-container">
-      <div className="dashboard-container">
-        
+      <div className="dashboard-container-2">
+        {studySessions.map((session, index) => (
+          <div id={"card-" + index} className="session-card" key={index}>
+            <div className="session-bubble">
+              <div className="session-date">
+                <h3>{session.date}</h3>
+                <p>{session.startTime} - {session.endTime}</p>
+              </div>
+              <div className="session-time">
+                <h3>{session.duration}</h3>
+                <p>duration</p>
+              </div>
+            </div>
+            <img className="taumy-state" src={session.success ? taumyHappy : taumySad}></img>
+          </div>
+        ))}
       </div>
       <div className="navbar">
         <img src={home} onClick={() => navigate('/home')} alt="Loading..." />

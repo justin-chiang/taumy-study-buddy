@@ -84,7 +84,7 @@ export default function Stats() {
           </div>
         </div>
 
-        <button class="btn" onClick={() => handleLogout()}>Sign Out</button>
+        <button className="btn" onClick={() => handleLogout()}>Sign Out</button>
 
       </div>
       <div className="navbar">

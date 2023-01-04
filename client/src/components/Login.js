@@ -21,6 +21,7 @@ export default function Login() {
       console.log(loginResponse);
       navigate('/home');
     } catch (err) {
+      alert('Login failed. Please double check your email and password.');
       console.log(err);
     }
     
