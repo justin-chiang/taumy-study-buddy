@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/Register.css';
+import '../styles/register.css';
 
 export default function Login() {
   const navigate = useNavigate();

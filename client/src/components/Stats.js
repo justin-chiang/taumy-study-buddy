@@ -5,7 +5,7 @@ import loading from '../assets/loading.gif';
 import home from '../assets/home.png';
 import study from '../assets/study.png';
 import stats from '../assets/stats.png';
-import '../styles/Stats.css';
+import '../styles/stats.css';
 
 export default function Stats() {
   const navigate = useNavigate();
