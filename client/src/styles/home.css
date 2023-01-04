@@ -6,14 +6,12 @@ body {
     padding: 0px;
     width: 100vw;
     height: 100vh;
-    min-height: -webkit-fill-available;
     background-color: #7FBADC;
     font-family: 'Roboto Flex', sans-serif;
     color: white;
 }
 
 .bg-container {
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -21,7 +19,7 @@ body {
 }
 
 .loading {
-    height: 100%;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,8 +31,8 @@ body {
 }
 
 .dashboard-container {
-    width: 90%;
-    height: 90%;
+    width: 90vw;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,8 +41,8 @@ body {
 }
 
 .navbar {
-    width: 100%;
-    height: 10%;
+    width: 100vw;
+    height: 10vh;
     background-color: #57A4D1;
     display: flex;
     justify-content: space-evenly;
