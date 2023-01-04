@@ -29,7 +29,7 @@ export default function Login() {
     console.log(`Registering user with name: ${name}, with email: ${email} and password: ${password}`);
 
     try {
-      const registerResponse = await axios.post('http://localhost:9000/api/users/register', { name, email, password });
+      const registerResponse = await axios.post('https://taumy-study-buddy.onrender.com/api/users/register', { name, email, password });
       alert('User created! Navigate to the login page to login with your account.');
       console.log(registerResponse);
     } catch (err) {

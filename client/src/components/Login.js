@@ -16,7 +16,7 @@ export default function Login() {
     console.log(`Logging in with email: ${email} and password: ${password}`);
 
     try {
-      const loginResponse = await axios.post('http://localhost:9000/api/users/login', { email, password });
+      const loginResponse = await axios.post('https://taumy-study-buddy.onrender.com/api/users/login', { email, password });
       localStorage.setItem('jwt_token', loginResponse.data.token);
       console.log(loginResponse);
       navigate('/home');

@@ -18,7 +18,7 @@ export default function Study() {
     if (token) {
       const fetchData = async () => {
         try {
-          const fetchStudySessions = await axios.get('http://localhost:9000/api/study/getSessions', {
+          const fetchStudySessions = await axios.get('https://taumy-study-buddy.onrender.com/api/study/getSessions', {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
             }

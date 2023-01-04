@@ -28,12 +28,12 @@ export default function Home() {
     if (token) {
       const fetchData = async () => {
         try {
-          const fetchUser = await axios.get('http://localhost:9000/api/users/whoami', {
+          const fetchUser = await axios.get('https://taumy-study-buddy.onrender.com/api/users/whoami', {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
             }
           });
-          const fetchStudyData = await axios.get('http://localhost:9000/api/study/getStudiedToday', {
+          const fetchStudyData = await axios.get('https://taumy-study-buddy.onrender.com/api/study/getStudiedToday', {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
             }
