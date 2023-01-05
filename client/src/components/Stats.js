@@ -64,20 +64,20 @@ export default function Stats() {
             <h3>Here are your ongoing stats!</h3>
           </div>
           <div className="stats-streak">
-            <h3 className="streak-num">{"4" || studyStats.currStreak}</h3>
+            <h3 className="streak-num">{studyStats.currStreak}</h3>
             <h3>Day Streak</h3>
           </div>
           <div className="stats-box">
             <div className="stat">
-              <h3>{"30h 0m" || studyStats.weekTotalTime}</h3>
+              <h3>{studyStats.weekTotalTime}</h3>
               <h4>week</h4>
             </div>
             <div className="stat">
-              <h3>{"30" || studyStats.weekTotalSessions}</h3>
+              <h3>{studyStats.weekTotalSessions}</h3>
               <h4>sessions</h4>
             </div>
             <div className="stat">
-              <h3>{"0h 0m" || studyStats.todayTotalTime}</h3>
+              <h3>{studyStats.todayTotalTime}</h3>
               <h4>today</h4>
             </div>
           </div>
@@ -90,15 +90,15 @@ export default function Stats() {
           </div>
           <div className="stats-box">
             <div className="stat">
-              <h3>{"40h 32m" || studyStats.overallTotalTime}</h3>
+              <h3>{studyStats.overallTotalTime}</h3>
               <h4>total</h4>
             </div>
             <div className="stat">
-              <h3>{"94" || studyStats.overallTotalSessions}</h3>
+              <h3>{studyStats.overallTotalSessions}</h3>
               <h4>sessions</h4>
             </div>
             <div className="stat">
-              <h3>{"10h 0m" || studyStats.longestTotalSession}</h3>
+              <h3>{studyStats.longestTotalSession}</h3>
               <h4>longest</h4>
             </div>
           </div>

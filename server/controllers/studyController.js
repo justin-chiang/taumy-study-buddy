@@ -134,7 +134,7 @@ const getStudiedToday = async (req, res) => {
 // @desc    Gets study stats for this week and all time on stats page
 // @route   GET api/study/deleteSession
 const getStudyStats = async (req, res) => {
-    // try {
+    try {
         const allSessions = await Session.find({ userId: req.user._id, success: true });
         const overallTotalSessions = allSessions.length;
         const overallTotalTime = allSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
@@ -142,8 +142,6 @@ const getStudyStats = async (req, res) => {
         if (allSessions.length !== 0) {
             longestTotalSession = Math.max(...allSessions.map(session => session.duration));
         }
-
-        // console.log(allSessions);
 
         let currStreak = 0;
         let tempDate = new Date();
@@ -164,8 +162,6 @@ const getStudyStats = async (req, res) => {
         while(studiedPrevDay(tempDate)) {
             currStreak++;
         }
-
-        console.log(currStreak + "DAYS");
 
         const today = new Date();
         const todayDay = today.getDay();
@@ -197,12 +193,12 @@ const getStudyStats = async (req, res) => {
             overallTotalTime: Math.floor(overallTotalTime / 60) + 'h ' + overallTotalTime % 60 + 'm',
             longestTotalSession: Math.floor(longestTotalSession / 60) + 'h ' + longestTotalSession % 60 + 'm',
         });
-    // } catch (err) {
-    //     return res.status(404).json({
-    //         message: 'Error fetching data',
-    //         error: err
-    //     });
-    // }
+    } catch (err) {
+        return res.status(404).json({
+            message: 'Error fetching data',
+            error: err
+        });
+    }
 }
 
 module.exports = {
