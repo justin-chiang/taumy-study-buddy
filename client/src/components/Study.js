@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import taumyHappy from '../assets/emotionGrin.gif';
-import taumySad from '../assets/emotionSad.gif';
+import taumyHappy from '../assets/emotionGrin.png';
+import taumySad from '../assets/emotionSad.png';
 import loading from '../assets/loading.gif';
 import home from '../assets/home.png';
 import study from '../assets/study.png';

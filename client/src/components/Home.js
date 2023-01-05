@@ -76,9 +76,11 @@ export default function Home() {
     <div className="bg-container">
       <div className="dashboard-container">
         <img src={taumyState === 'happy' ? taumyHappy : taumySad} alt="Loading..." className="taumygif" />
-        <h3 className="time">{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</h3>
-        <h3 className="name">Welcome, {user.name}!</h3>
-        <p className="studymsg">{studyMsg}</p>
+        <div>
+          <h3 className="time">{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</h3>
+          <h3 className="name">Welcome, {user.name}!</h3>
+          <p className="studymsg">{studyMsg}</p>
+        </div>
       </div>
       <div className="navbar">
         <img src={home} className="active" onClick={() => navigate('/home')} alt="Loading..." />

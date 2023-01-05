@@ -134,14 +134,38 @@ const getStudiedToday = async (req, res) => {
 // @desc    Gets study stats for this week and all time on stats page
 // @route   GET api/study/deleteSession
 const getStudyStats = async (req, res) => {
-    try {
-        const allSessions = await Session.find({ userId: req.user._id });
-        const overallTotal = allSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
-        let longestSession = 0;
+    // try {
+        const allSessions = await Session.find({ userId: req.user._id, success: true });
+        const overallTotalSessions = allSessions.length;
+        const overallTotalTime = allSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
+        let longestTotalSession = 0;
         if (allSessions.length !== 0) {
-            longestSession = Math.max(...allSessions.map(session => session.duration));
+            longestTotalSession = Math.max(...allSessions.map(session => session.duration));
         }
-        console.log(longestSession);
+
+        // console.log(allSessions);
+
+        let currStreak = 0;
+        let tempDate = new Date();
+        tempDate.setHours(0, 0, 0, 0);
+        const studiedPrevDay = (currDay) => {
+            const yesterday = new Date(currDay.getTime() - (24 * 60 * 60 * 1000));
+            console.log(currDay.toString());
+            console.log(yesterday.toString());
+            if (allSessions.some((session) => ((yesterday <= session.start) && (session.start <= currDay)))) {
+                tempDate = yesterday;
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        while(studiedPrevDay(tempDate)) {
+            currStreak++;
+        }
+
+        console.log(currStreak + "DAYS");
 
         const today = new Date();
         const todayDay = today.getDay();
@@ -149,34 +173,36 @@ const getStudyStats = async (req, res) => {
         begOfWeek.setHours(0, 0, 0, 0);
         const currDay = new Date();
 
-        console.log(currDay.toString());
-        console.log(begOfWeek.toString());
-
-        console.log(currDay);
-        console.log(begOfWeek);
-
-        const weekSessions = await Session.find({ userId: req.user._id, start: { $gte: begOfWeek, $lte: currDay } });
-        const weekTotal = weekSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
+        const weekSessions = await Session.find({ userId: req.user._id, success: true, start: { $gte: begOfWeek, $lte: currDay } });
+        const weekTotalSessions = weekSessions.length;
+        const weekTotalTime = weekSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
 
         const pstToday = currDay.toString().substring(0, 15);
         const todaysSessions = weekSessions.filter((session) => {
             const isoString = session.start.toString().substring(0, 15);
             return isoString === pstToday;
         });
-        const todayTotal = todaysSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
+        const todayTotalTime = todaysSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
+
+        if (todaysSessions.length > 0) {
+            currStreak++;
+        }
 
         return res.status(200).json({
-            weekTotal: Math.floor(weekTotal / 60) + 'h ' + weekTotal % 60 + 'm',
-            todayTotal: Math.floor(todayTotal / 60) + 'h ' + todayTotal % 60 + 'm',
-            overallTotal: Math.floor(overallTotal / 60) + 'h ' + overallTotal % 60 + 'm',
-            longestSession: Math.floor(longestSession / 60) + 'h ' + longestSession % 60 + 'm',
+            currStreak: currStreak,
+            weekTotalSessions: weekTotalSessions,
+            weekTotalTime: Math.floor(weekTotalTime / 60) + 'h ' + weekTotalTime % 60 + 'm',
+            todayTotalTime: Math.floor(todayTotalTime / 60) + 'h ' + todayTotalTime % 60 + 'm',
+            overallTotalSessions: overallTotalSessions,
+            overallTotalTime: Math.floor(overallTotalTime / 60) + 'h ' + overallTotalTime % 60 + 'm',
+            longestTotalSession: Math.floor(longestTotalSession / 60) + 'h ' + longestTotalSession % 60 + 'm',
         });
-    } catch (err) {
-        return res.status(404).json({
-            message: 'Error fetching data',
-            error: err
-        });
-    }
+    // } catch (err) {
+    //     return res.status(404).json({
+    //         message: 'Error fetching data',
+    //         error: err
+    //     });
+    // }
 }
 
 module.exports = {
