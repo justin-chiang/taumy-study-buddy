@@ -109,26 +109,25 @@ const deleteSession = async (req, res) => {
 }
 
 // @desc    Gets whether or not user has studied today
-// @route   GET api/study/deleteSession
+// @route   GET api/study/getStudiedToday
 const getStudiedToday = async (req, res) => {
-    try {
-        const today = new Date();
+    // try {
+        let today = new Date();
         today.setHours(0, 0, 0, 0);
-
-        console.log(today);
-        console.log(today.toString());
 
         const todaysSessions = await Session.find({ userId: req.user._id, start: { $gte: today } });
 
         return res.status(200).json({
+            todaysSessions,
+            compareDate: today.toISOString(),
             studied: (todaysSessions.length !== 0) && (todaysSessions.some((e) => (e.success)))
         });
-    } catch (err) {
-        return res.status(404).json({
-            message: 'Error fetching data',
-            error: err
-        });
-    }
+    // } catch (err) {
+    //     return res.status(404).json({
+    //         message: 'Error fetching data',
+    //         error: err
+    //     });
+    // }
 }
 
 // @desc    Gets study stats for this week and all time on stats page
