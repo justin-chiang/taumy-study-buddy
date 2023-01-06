@@ -88,6 +88,10 @@ export default function Stats() {
             <img src={taumyHappy} alt="Loading..."></img>
             <h3>Here are your all time stats!</h3>
           </div>
+          <div className="stats-streak">
+            <h3 className="streak-num">{studyStats.totalDaysStudied}</h3>
+            <h3>Days Studied</h3>
+          </div>
           <div className="stats-box">
             <div className="stat">
               <h3>{studyStats.overallTotalTime}</h3>

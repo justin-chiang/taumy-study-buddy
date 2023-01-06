@@ -139,6 +139,7 @@ const getStudiedToday = async (req, res) => {
 const getStudyStats = async (req, res) => {
     try {
         const allSessions = await Session.find({ userId: req.user._id, success: true });
+
         const overallTotalSessions = allSessions.length;
         const overallTotalTime = allSessions.reduce((accumulator, session) => accumulator + session.duration, 0);
         let longestTotalSession = 0;
@@ -166,6 +167,10 @@ const getStudyStats = async (req, res) => {
         while(studiedPrevDay(tempDate)) {
             currStreak++;
         }
+
+        const allSessionsByDay = allSessions.map((session) => (session.start.toString().substring(0, 15)));
+        console.log(allSessionsByDay);
+        const totalDaysStudied = [...new Set(allSessionsByDay)].length;
 
         const today = new Date();
         today.setHours(tempDate.getHours() - 8);
@@ -200,6 +205,7 @@ const getStudyStats = async (req, res) => {
             weekTotalSessions: weekTotalSessions,
             weekTotalTime: Math.floor(weekTotalTime / 60) + 'h ' + weekTotalTime % 60 + 'm',
             todayTotalTime: Math.floor(todayTotalTime / 60) + 'h ' + todayTotalTime % 60 + 'm',
+            totalDaysStudied: totalDaysStudied,
             overallTotalSessions: overallTotalSessions,
             overallTotalTime: Math.floor(overallTotalTime / 60) + 'h ' + overallTotalTime % 60 + 'm',
             longestTotalSession: Math.floor(longestTotalSession / 60) + 'h ' + longestTotalSession % 60 + 'm',
