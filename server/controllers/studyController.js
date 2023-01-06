@@ -111,7 +111,7 @@ const deleteSession = async (req, res) => {
 // @desc    Gets whether or not user has studied today
 // @route   GET api/study/getStudiedToday
 const getStudiedToday = async (req, res) => {
-    // try {
+    try {
         let today = new Date();
         console.log(today.toISOString());
         today.setHours(today.getHours() - 8);
@@ -126,12 +126,12 @@ const getStudiedToday = async (req, res) => {
             compareDate: today.toISOString(),
             studied: (todaysSessions.length !== 0) && (todaysSessions.some((e) => (e.success)))
         });
-    // } catch (err) {
-    //     return res.status(404).json({
-    //         message: 'Error fetching data',
-    //         error: err
-    //     });
-    // }
+    } catch (err) {
+        return res.status(404).json({
+            message: 'Error fetching data',
+            error: err
+        });
+    }
 }
 
 // @desc    Gets study stats for this week and all time on stats page
@@ -148,11 +148,12 @@ const getStudyStats = async (req, res) => {
 
         let currStreak = 0;
         let tempDate = new Date();
-        tempDate.setHours(0, 0, 0, 0);
+        tempDate.setHours(tempDate.getHours() - 8);
+        tempDate.setUTCHours(0, 0, 0, 0);
         const studiedPrevDay = (currDay) => {
-            const yesterday = new Date(currDay.getTime() - (24 * 60 * 60 * 1000));
-            console.log(currDay.toString());
-            console.log(yesterday.toString());
+            let yesterday = new Date(currDay.getTime() - (24 * 60 * 60 * 1000));
+            // console.log(currDay.toISOString());
+            // console.log(yesterday.toISOString());
             if (allSessions.some((session) => ((yesterday <= session.start) && (session.start <= currDay)))) {
                 tempDate = yesterday;
                 return true;
@@ -167,10 +168,17 @@ const getStudyStats = async (req, res) => {
         }
 
         const today = new Date();
+        today.setHours(tempDate.getHours() - 8);
+
         const todayDay = today.getDay();
         const begOfWeek = new Date(today.setDate(today.getDate() - todayDay));
-        begOfWeek.setHours(0, 0, 0, 0);
+        begOfWeek.setUTCHours(0, 0, 0, 0);
+
         const currDay = new Date();
+        currDay.setHours(currDay.getHours() - 8);
+
+        console.log(currDay.toISOString());
+        console.log(begOfWeek.toISOString());
 
         const weekSessions = await Session.find({ userId: req.user._id, success: true, start: { $gte: begOfWeek, $lte: currDay } });
         const weekTotalSessions = weekSessions.length;
