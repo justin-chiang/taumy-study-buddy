@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import loading from '../assets/loading.gif';
 import '../styles/login.css';
 
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loggingIn, setLoggingIn] = useState(false);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -15,16 +17,28 @@ export default function Login() {
     }
     console.log(`Logging in with email: ${email} and password: ${password}`);
 
+    setLoggingIn(true);
     try {
       const loginResponse = await axios.post('https://taumy-study-buddy.onrender.com/api/users/login', { email, password });
       localStorage.setItem('jwt_token', loginResponse.data.token);
-      console.log(loginResponse);
+      setLoggingIn(false);
       navigate('/home');
     } catch (err) {
       alert('Login failed. Please double check your email and password.');
+      setLoggingIn(false);
       console.log(err);
     }
     
+  }
+
+  if (loggingIn) {
+    return(
+      <div className="bg-container">
+        <div className="loading">
+          <img src={loading} alt="Loading..."></img>
+        </div>
+      </div>
+    )
   }
 
   return (

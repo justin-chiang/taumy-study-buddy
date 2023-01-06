@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import loading from '../assets/loading.gif';
 import '../styles/register.css';
 
 export default function Login() {
@@ -8,6 +9,7 @@ export default function Login() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [registering, setRegistering] = useState(false);
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -15,14 +17,18 @@ export default function Login() {
       return;
     }
 
+    setRegistering(true);
+
     const emailRegex = /\S+@\S+\.\S+/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{8,}$/
     if (!emailRegex.test(email)) {
       alert('Please enter a valid email address.');
+      setRegistering(false);
       return;
     }
     if (!passwordRegex.test(password)) {
       alert('Please enter a password that is at least 8 characters long, containing at least one uppercase letter, lowercase letter, digit, and special symbol.')
+      setRegistering(false);
       return;
     }
     
@@ -31,12 +37,24 @@ export default function Login() {
     try {
       const registerResponse = await axios.post('https://taumy-study-buddy.onrender.com/api/users/register', { name, email, password });
       alert('User created! Navigate to the login page to login with your account.');
+      setRegistering(false);
       console.log(registerResponse);
     } catch (err) {
       alert('User with this email already exists. Please enter another email to create an account.');
+      setRegistering(false);
       console.log(err);
     }
     
+  }
+
+  if (registering) {
+    return(
+      <div className="bg-container">
+        <div className="loading">
+          <img src={loading} alt="Loading..."></img>
+        </div>
+      </div>
+    )
   }
 
   return (

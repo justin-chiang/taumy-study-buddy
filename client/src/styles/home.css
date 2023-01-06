@@ -78,7 +78,8 @@ body {
 }
 
 .dashboard-container .studymsg {
+    width: 80vw;
     font-weight: 200;
-    font-size: 24px;
+    font-size: 20px;
     margin-top: 20px;
 }
