@@ -113,7 +113,11 @@ const deleteSession = async (req, res) => {
 const getStudiedToday = async (req, res) => {
     // try {
         let today = new Date();
-        today.setHours(0, 0, 0, 0);
+        console.log(today.toISOString());
+        today.setHours(today.getHours() - 8);
+        console.log(today.toISOString());
+        today.setUTCHours(0, 0, 0, 0);
+        console.log(today.toISOString());
 
         const todaysSessions = await Session.find({ userId: req.user._id, start: { $gte: today } });
 
