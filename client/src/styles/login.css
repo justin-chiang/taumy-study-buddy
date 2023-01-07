@@ -86,9 +86,17 @@ body {
     color: white;
 }
 
+.login-container .btn:hover {
+    background-color: #457B9D;
+}
+
 .login-container .footer {
     font-size: 22px;
     font-weight: 400;
     text-align: center;
     margin: 10vh 0px 0px 0px;
+}
+
+.login-container .footer:hover {
+    color: #26446E;
 }

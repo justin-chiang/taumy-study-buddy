@@ -1,0 +1,70 @@
+/* all styling */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz@8..144&display=swap');
+
+body {
+    margin: 0px;
+    padding: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: #7FBADC;
+    font-family: 'Roboto Flex', sans-serif;
+    color: white;
+}
+
+.bg-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.loading {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading img {
+    width: 30px;
+    height: 30px;
+}
+
+.verify-container {
+    width: 80vw;
+    height: 100vh;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* end all styling */
+
+.taumy-greet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.taumy-greet img {
+    width: 100px;
+    height: 100px;
+}
+
+.taumy-greet h1 {
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.footer {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.footer:hover {
+    color: #26446E;
+}

@@ -86,6 +86,10 @@ body {
     color: white;
 }
 
+.login-container .btn:hover {
+    background-color: #457B9D;
+}
+
 .login-container .footer {
     font-size: 22px;
     font-weight: 400;

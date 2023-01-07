@@ -24,7 +24,12 @@ export default function Login() {
       setLoggingIn(false);
       navigate('/home');
     } catch (err) {
-      alert('Login failed. Please double check your email and password.');
+      if (err.response.status === 403) {
+        alert('User has not yet verified their email. Please check your email to complete verification.')
+      }
+      else if (err.response.status === 404) {
+        alert('Login failed. Please double check your email and password.');
+      }
       setLoggingIn(false);
       console.log(err);
     }
