@@ -12,6 +12,6 @@ router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.post('/verify', verifyToken);
 router.get('/everyone', getEveryone);
-router.get('/whoami', authenticateToken, getWho)
+router.get('/whoami', authenticateToken, getWho);
 
 module.exports = router;
