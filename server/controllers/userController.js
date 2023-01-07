@@ -109,7 +109,7 @@ const verifyToken = async (req, res) => {
             });
         }
     
-        await User.updateOne({ _id: user._id, verified: true });
+        await User.updateOne({ _id: user._id }, { verified: true });
         await Token.findByIdAndRemove(token._id);
     
         return res.status(200).json({

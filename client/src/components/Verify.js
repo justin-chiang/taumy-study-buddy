@@ -13,6 +13,7 @@ export default function Home() {
   useEffect(() => {
     const validateUser = async () => {
       try {
+        console.log(params);
         const validate = await axios.post('https://taumy-study-buddy.onrender.com/api/users/verify', { id: params.id, token: params.token });
         setVerified(true);
       } catch (err) {
