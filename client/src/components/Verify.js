@@ -10,29 +10,29 @@ export default function Home() {
   const params = useParams();
   const [verified, setVerified] = useState(false);
 
-  // useEffect(() => {
-  //   const validateUser = async () => {
-  //     try {
-  //       const fetchUser = await axios.post('https://taumy-study-buddy.onrender.com/api/users/verify', { id: params.id, token: params.token });
-  //       setVerified(true);
-  //     } catch (err) {
-  //       alert('Invalid link, navigating to login page.');
-  //       console.log(err);
-  //       navigate('/');
-  //     }
-  //   }
-  //   validateUser();
-  // }, [navigate]);
+  useEffect(() => {
+    const validateUser = async () => {
+      try {
+        const validate = await axios.post('https://taumy-study-buddy.onrender.com/api/users/verify', { id: params.id, token: params.token });
+        setVerified(true);
+      } catch (err) {
+        alert('Invalid link, navigating to login page.');
+        console.log(err);
+        navigate('/');
+      }
+    }
+    validateUser();
+  }, [navigate]);
 
-  // if (!verified) {
-  //   return(
-  //     <div className="bg-container">
-  //       <div className="loading">
-  //         <img src={loading} alt="Loading..."></img>
-  //       </div>
-  //     </div>
-  //   )
-  // }
+  if (!verified) {
+    return(
+      <div className="bg-container">
+        <div className="loading">
+          <img src={loading} alt="Loading..."></img>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="bg-container">

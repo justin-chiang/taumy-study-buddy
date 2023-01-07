@@ -30,7 +30,7 @@ const registerUser = async (req, res) => {
             token: crypto.randomBytes(32).toString('hex'),
         });
 
-        const message = `Hi ${user.name},\n\nThanks for registering an account to use Taumy! Click the following link to verify your account:\n\nhttps://taumy-study.onrender.com/user/verify/${user.id}/${token.token}`;
+        const message = `Hi ${user.name},\n\nThanks for registering an account to use Taumy! Click the following link to verify your account:\n\nhttps://taumy-study.onrender.com/verify/${user.id}/${token.token}`;
         await authEmail(user.email, "Verify Email to use Taumy!", message);
 
         console.log(message);
