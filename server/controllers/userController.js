@@ -2,7 +2,7 @@ const User = require('../models/userModel');
 const Token = require('../models/tokenModel');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const authEmail = require('../utils/authEmail')
+const sendEmail = require('../utils/sendEmail');
 require("dotenv").config();
 
 // @desc    Create new user in db
@@ -31,7 +31,7 @@ const registerUser = async (req, res) => {
         });
 
         const message = `Hi ${user.name},\n\nThanks for registering an account to use Taumy! Click the following link to verify your account:\n\nhttps://taumy-study.onrender.com/verify/${user.id}/${token.token}`;
-        await authEmail(user.email, "Verify Email to use Taumy!", message);
+        await sendEmail(user.email, "Verify Email to use Taumy!", message);
 
         console.log(message);
 
@@ -90,7 +90,6 @@ const loginUser = async (req, res) => {
 
 const verifyToken = async (req, res) => {
     try {
-        console.log(req);
         const user = await User.findOne({ _id: req.body.id });
         if (!user) {
             return res.status(400).json({
@@ -126,7 +125,6 @@ const verifyToken = async (req, res) => {
         })
     }
 };
-  
 
 // @desc    Obtains all registered users in database (for Pi use)
 // @route   GET /everyone

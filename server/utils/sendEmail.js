@@ -1,14 +1,10 @@
 const nodemailer = require("nodemailer");
-const emailjs = require("emailjs-com")
 
-const authEmail = async (email, subject, text) => {
+const sendEmail = async (email, subject, text) => {
     try {
         console.log(process.env.EMAIL_USER);
         console.log(process.env.EMAIL_PASSWORD);
         const transporter = nodemailer.createTransport({
-            // host: process.env.EMAIL_HOST,
-            // port: process.env.EMAIL_PORT,
-            // secure: true,
             service: 'gmail',
             auth: {
                 user: process.env.EMAIL_USER,
@@ -23,11 +19,11 @@ const authEmail = async (email, subject, text) => {
             text: text,
         });
 
-        console.log("auth email sent");
+        console.log("email sent");
     } catch (error) {
         console.log("email not sent");
         console.log(error);
     }
 };
 
-module.exports = authEmail;
+module.exports = sendEmail;

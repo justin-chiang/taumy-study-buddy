@@ -36,7 +36,7 @@ export default function Login() {
 
     try {
       const registerResponse = await axios.post('https://taumy-study-buddy.onrender.com/api/users/register', { name, email, password });
-      alert('User created! Navigate to the login page to login with your account.');
+      alert('User created! Check your email for an email verification link to activate your account.');
       setRegistering(false);
       console.log(registerResponse);
     } catch (err) {
