@@ -9,7 +9,6 @@ function authenticateToken(req, res, next) {
         const user = jwt.verify(token, process.env.JWT_SECRET);
         req.user = user;
         console.log("token auth'd");
-        console.log(req.user);
         next();
     } catch (err) {
         console.log(err);

@@ -6,7 +6,7 @@ require("dotenv").config();
 // @desc    Create new study session (for Pi)
 // @route   POST api/study/createSession
 const createSession = async (req, res) => {
-    const { userId, duration, success, start, end, date } = req.body;
+    const { userId, duration, success, start, end } = req.body;
 
     try {
         const user = await User.findOne({ _id: userId });
@@ -16,8 +16,7 @@ const createSession = async (req, res) => {
             duration,
             success,
             start,
-            end,
-            date,
+            end
         });
         console.log(session);
         return res.status(201).json(session);

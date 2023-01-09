@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// schema describing user in db
+// schema describing session in db
 const sessionSchema = new mongoose.Schema(
     {
         user: { type: String, required: true },
