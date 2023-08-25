@@ -8,13 +8,14 @@ import '../styles/verify.css';
 export default function Home() {
   const navigate = useNavigate();
   const params = useParams();
+  const route = process.env.REACT_APP_NODE_ENV == 'production' ? 'https://taumy-study-buddy.onrender.com' : 'http://localhost:9000'
   const [verified, setVerified] = useState(false);
 
   useEffect(() => {
     const validateUser = async () => {
       try {
         console.log(params);
-        const validate = await axios.post('https://taumy-study-buddy.onrender.com/api/users/verify', { id: params.id, token: params.token });
+        const validate = await axios.post(route + '/api/users/verify', { id: params.id, token: params.token });
         setVerified(true);
       } catch (err) {
         alert('Invalid link, navigating to login page.');

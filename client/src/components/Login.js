@@ -6,6 +6,7 @@ import '../styles/login.css';
 
 export default function Login() {
   const navigate = useNavigate();
+  const route = process.env.REACT_APP_NODE_ENV == 'production' ? 'https://taumy-study-buddy.onrender.com' : 'http://localhost:9000'
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggingIn, setLoggingIn] = useState(false);
@@ -19,7 +20,7 @@ export default function Login() {
 
     setLoggingIn(true);
     try {
-      const loginResponse = await axios.post('https://taumy-study-buddy.onrender.com/api/users/login', { email, password });
+      const loginResponse = await axios.post(route + '/api/users/login', { email, password });
       localStorage.setItem('jwt_token', loginResponse.data.token);
       setLoggingIn(false);
       navigate('/home');

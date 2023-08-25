@@ -10,6 +10,7 @@ import '../styles/stats.css';
 
 export default function Stats() {
   const navigate = useNavigate();
+  const route = process.env.REACT_APP_NODE_ENV == 'production' ? 'https://taumy-study-buddy.onrender.com' : 'http://localhost:9000'
   const [studyStats, setStudyStats] = useState(null);
 
   const handleLogout = async () => {
@@ -23,7 +24,7 @@ export default function Stats() {
     if (token) {
       const fetchData = async () => {
         try {
-          const fetchStudyData = await axios.get('https://taumy-study-buddy.onrender.com/api/study/getStudyStats', {
+          const fetchStudyData = await axios.get(route + '/api/study/getStudyStats', {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
             }

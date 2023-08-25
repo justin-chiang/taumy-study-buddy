@@ -11,6 +11,7 @@ import '../styles/home.css';
 
 export default function Home() {
   const navigate = useNavigate();
+  const route = process.env.REACT_APP_NODE_ENV == 'production' ? 'https://taumy-study-buddy.onrender.com' : 'http://localhost:9000'
   const [user, setUser] = useState(null);
   const [taumyState, setTaumyState] = useState('');
   const [studyMsg, setStudyMsg] = useState('');
@@ -28,12 +29,12 @@ export default function Home() {
     if (token) {
       const fetchData = async () => {
         try {
-          const fetchUser = await axios.get('https://taumy-study-buddy.onrender.com/api/users/whoami', {
+          const fetchUser = await axios.get(route + '/api/users/whoami', {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
             }
           });
-          const fetchStudyData = await axios.get('https://taumy-study-buddy.onrender.com/api/study/getStudiedToday', {
+          const fetchStudyData = await axios.get(route + '/api/study/getStudiedToday', {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
             }

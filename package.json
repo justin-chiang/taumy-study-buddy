@@ -1,5 +1,5 @@
 {
-  "name": "alpha-delta-build",
+  "name": "taumy-study-buddy",
   "version": "1.0.0",
   "description": "Web application for Taumy study buddy",
   "main": "./server/app.js",
@@ -7,18 +7,19 @@
     "server": "cd ./server && npm start",
     "client": "cd ./client && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install && cd ./server && npm install & cd ./client && npm install",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/justin-chiang/Taumy-App.git"
+    "url": "git+https://github.com/justin-chiang/taumy-study-buddy.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/justin-chiang/Taumy-App/issues"
+    "url": "https://github.com/justin-chiang/taumy-study-buddy/issues"
   },
-  "homepage": "https://github.com/justin-chiang/Taumy-App#readme",
+  "homepage": "https://github.com/justin-chiang/taumy-study-buddy#readme",
   "dependencies": {
     "concurrently": "^7.6.0"
   }

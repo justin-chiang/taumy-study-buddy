@@ -11,6 +11,7 @@ import '../styles/study.css';
 
 export default function Study() {
   const navigate = useNavigate();
+  const route = process.env.REACT_APP_NODE_ENV == 'production' ? 'https://taumy-study-buddy.onrender.com' : 'http://localhost:9000'
   const [studySessions, setStudySessions] = useState(null);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ export default function Study() {
     if (token) {
       const fetchData = async () => {
         try {
-          const fetchStudySessions = await axios.get('https://taumy-study-buddy.onrender.com/api/study/getSessions', {
+          const fetchStudySessions = await axios.get(route + '/api/study/getSessions', {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
             }

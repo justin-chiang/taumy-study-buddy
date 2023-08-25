@@ -6,6 +6,7 @@ import '../styles/register.css';
 
 export default function Login() {
   const navigate = useNavigate();
+  const route = process.env.REACT_APP_NODE_ENV == 'production' ? 'https://taumy-study-buddy.onrender.com' : 'http://localhost:9000'
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,7 +36,7 @@ export default function Login() {
     console.log(`Registering user with name: ${name}, with email: ${email} and password: ${password}`);
 
     try {
-      const registerResponse = await axios.post('https://taumy-study-buddy.onrender.com/api/users/register', { name, email, password });
+      const registerResponse = await axios.post(route + '/api/users/register', { name, email, password });
       alert('User created! Check your email for an email verification link to activate your account.');
       setRegistering(false);
       console.log(registerResponse);
